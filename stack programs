@@ -1,0 +1,230 @@
+// Online C compiler to run C program online
+using two pointers
+
+#include <stdio.h>
+#include<stdlib.h>
+struct StackNode {
+    int data;
+    struct StackNode* next;
+};
+  
+struct StackNode* newNode(int data)
+{
+    struct StackNode* stackNode = 
+      (struct StackNode*)
+      malloc(sizeof(struct StackNode));
+    stackNode->data = data;
+    stackNode->next = NULL;
+    return stackNode;
+}
+  
+int isEmpty(struct StackNode* root)
+{
+    return !root;
+}
+  
+void push(struct StackNode** root, int data)
+{
+    struct StackNode* stackNode = newNode(data);
+    stackNode->next = *root;
+    *root = stackNode;
+    printf("%d pushed to stack\n", data);
+}
+  
+int pop(struct StackNode** root)
+{
+    if (isEmpty(*root))
+        return INT_MIN;
+    struct StackNode* temp = *root;
+    *root = (*root)->next;
+    int popped = temp->data;
+    free(temp);
+  
+    return popped;
+}
+  
+int peek(struct StackNode* root)
+{
+    if (isEmpty(root))
+        return INT_MIN;
+    return root->data;
+}
+  
+int main()
+{
+    struct StackNode* root = NULL;
+  
+    push(&root, 10);
+    push(&root, 20);
+    push(&root, 30);
+  
+    printf("%d popped from stack\n", pop(&root));
+  
+    printf("Top element is %d\n", peek(root));
+  
+    return 0;
+}
+
+
+
+
+another way 
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+
+struct stack{
+    int top;
+    int size;
+    int *arr;
+};
+
+struct stack* create(int capacity){
+    struct stack* st = (struct stack*)malloc(sizeof(struct stack));
+    st->top = -1;
+    st->size = capacity;
+    st->arr = (int*)malloc(st->size*sizeof(int));
+    return st;
+}
+
+int isEmpty(struct stack* st){
+    if(st->top==-1){
+        return 1;
+    }
+    return 0;
+}
+
+int isFull(struct stack* st){
+    if(st->top == st->size-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void push(struct stack* st,int val){
+    if(isFull(st)){
+        printf("Stack Overflow\n");
+    }
+    else{
+        st->top ++;
+        st->arr[st->top] = val;
+    }
+}
+
+
+int pop(struct stack* st){
+    if(isEmpty(st)){
+        return 0;
+    }else{
+    int temp = st->arr[st->top];
+    st->top--;
+    return temp;    
+    }
+}
+
+void display(struct stack* st){
+    for(int i=0;i<st->size;i++){
+        printf("%d ",st->arr[st->top]);
+        st->top--;
+    }
+}
+
+int main() {
+    struct stack* sn = create(5);
+    push(sn,10);
+    push(sn,10);
+    push(sn,20);
+    push(sn,10);
+    push(sn,10);
+    display(sn);
+    // push(sn,10);
+    // push(sn,10);
+    // push(sn,10);
+    // push(sn,10);
+
+    return 0;
+}
+
+
+using typedef
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+
+typedef struct stack{
+    int top;
+    int size;
+    int *arr;
+}stack;
+
+stack* create(int capacity){
+    struct stack* st = (stack*)malloc(sizeof(stack));
+    st->top = -1;
+    st->size = capacity;
+    st->arr = (int*)malloc(st->size*sizeof(int));
+    return st;
+}
+
+int isEmpty(stack* st){
+    if(st->top==-1){
+        return 1;
+    }
+    return 0;
+}
+
+int isFull(stack* st){
+    if(st->top == st->size-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void push(stack* st,int val){
+    if(isFull(st)){
+        printf("Stack Overflow\n");
+    }
+    else{
+        st->top ++;
+        st->arr[st->top] = val;
+    }
+}
+
+
+int pop(stack* st){
+    if(isEmpty(st)){
+        return 0;
+    }else{
+    int temp = st->arr[st->top];
+    st->top--;
+    return temp;    
+    }
+}
+
+void display(stack* st){
+    for(int i=0;i<st->size;i++){
+        printf("%d ",st->arr[st->top]);
+        st->top--;
+    }
+}
+
+int main() {
+    struct stack* sn = create(5);
+    push(sn,10);
+    push(sn,10);
+    push(sn,20);
+    push(sn,10);
+    push(sn,10);
+    display(sn);
+    // push(sn,10);
+    // push(sn,10);
+    // push(sn,10);
+    // push(sn,10);
+
+    return 0;
+}
+
+
