@@ -1,3 +1,95 @@
+**Normal way**
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+
+
+typedef struct stack{
+    int size;
+    int top;
+    int *arr;
+}stack;
+
+
+int isEmpty(stack* st){
+    if(st->top==-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+int isFull(stack* st){
+    if(st->top == st->size-1){
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void display(stack* stk){
+    int ind = stk->top;
+    while(ind>=0){
+        printf("%d ",stk->arr[ind]);
+        ind--;
+    }
+}
+
+void push(stack *st,int n){
+    if(isFull(st)){
+        printf("Stack is FULL");
+    }
+    st->top++;
+    st->arr[st->top] = n;
+}
+
+
+stack* create(int s){
+    stack* st = (stack*)malloc(sizeof(stack));
+    st->size=s;
+    st->top=-1;
+    st->arr = (int*)malloc(st->size*sizeof(int));
+    int x;
+    for(int i=0;i<s;i++){
+        printf("Enter the value\n");
+        scanf("%d",&x);
+        push(st,x);
+    }
+    return st;
+}
+
+int pop(stack* sk){
+    int x;
+    if(isEmpty(sk)){
+        printf("stack underflow");
+    }
+    x = sk->arr[sk->top];
+    sk->top--;
+    return x;
+}
+
+int main() {
+    stack* st = create(5);
+    // stack* st = (stack*)malloc(sizeof(stack));
+    // st->size=5;
+    // st->top=-1;
+    // st->arr = (int*)malloc(st->size*sizeof(int));
+    
+    // push(st,5);
+    // push(st,8);
+    // push(st,1);
+    
+    display(st);
+    printf("%d",pop(st));
+    display(st);
+    push(st,3);
+    display(st);
+    return 0;
+}
+
 // Online C compiler to run C program online
 using two pointers
 
